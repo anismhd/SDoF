@@ -3,6 +3,7 @@
 # 2 - the central difference method (conditionally stable)
 # 3 - the Galerkin method (stable)
 # 4 - the backward difference method (stable)
+from numpy import zeros
 def parabolicEqn(M, C, K, F, t, n=0, x0=0.0, v0=0.0):
     if n == 0:
         a = 0.5
@@ -20,9 +21,9 @@ def parabolicEqn(M, C, K, F, t, n=0, x0=0.0, v0=0.0):
         a = 3.0/2.0
         b = 2.0
     invM = 1.0/M
-    disp = np.zeros(len(t))
-    vel = np.zeros(len(t))
-    accl = np.zeros(len(t))
+    disp = zeros(len(t))
+    vel = zeros(len(t))
+    accl = zeros(len(t))
     disp[0] = x0
     vel[0] = v0
     accl[0] = invM * ( F[0] - K * x0 - C * v0);

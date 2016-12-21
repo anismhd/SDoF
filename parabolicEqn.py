@@ -3,7 +3,7 @@
 # 2 - the central difference method (conditionally stable)
 # 3 - the Galerkin method (stable)
 # 4 - the backward difference method (stable)
-def parabolicEqn(n, M, C, K, F, t, x0, v0):
+def parabolicEqn(M, C, K, F, t, n=0, x0=0.0, v0=0.0):
     if n == 0:
         a = 0.5
         b = 0.5

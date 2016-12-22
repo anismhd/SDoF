@@ -45,50 +45,118 @@ def parabolicEqn(M, C, K, F, t, n=0, x0=0.0, v0=0.0):
 if __name__ == "__main__":
     import matplotlib.pyplot as plt
     import numpy as np
-    kobe = np.loadtxt('Kobe.txt')
-    disp0, vel0, accl0 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=0, x0=0.0, v0=0.0)
-    disp1, vel1, accl1 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=1, x0=0.0, v0=0.0)
-#    disp2, vel2, accl2 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=2, x0=0.0, v0=0.0)
-    disp3, vel3, accl3 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=3, x0=0.0, v0=0.0)
-    disp4, vel4, accl4 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=4, x0=0.0, v0=0.0)
-    plt.subplot(2, 2, 1)
-    plt.plot( kobe[:,0], kobe[:,1], '--')
-    plt.title('Input Accelarogram')
-    plt.ylabel('Accelaration (g)')
-    plt.xlabel('Time (sec)')
+    import sys
+    import os
+    print "\n\n\tThis is a python module to analyse SDoF system subjected to arbitrary forcing"
+    print "\tby\t ANIS MOHAMMED VENGASSERI"
+    print "\t\t anis.mhd@gmail.com"
+    print "\t\t https://github.com/anismhd"
+    print "\t The time integration can be in of following types,"
+    print "\t\t 0 - The constant-average accelaration method (stable)"
+    print "\t\t 1 - The linear accelaration method (conditionally stable)"
+    print "\t\t 3 - The Galerkin method (stable)"
+    print "\t\t 4 - The backward difference method (stable) \n\n"
+    if len(sys.argv) < 2:
+        print "This is a demo output of module.."
+        print "\nDEMO 1 - Comparison of analytical and module output - Free vibration"
+        Wn = 5
+        eta = 0.05
+        x0 = 1.0
+        v0 = 0.0
+        print "\t\t{0:40s} = {1:.4f} ras/s".format('Natiral frequency of system ',Wn)
+        print "\t\t{0:40s} = {1:.4f} ".format('Damping ratio frequency of system ',eta)
+        print "\t\t{0:40s} = {1:.4f} m".format('Initial displacement of system ',x0)
+        print "\t\t{0:40s} = {1:.4f} m/s".format('Initial velocity of system ',v0)
+        plt.figure()
+        t = np.linspace(0,20,1001)
+        f = np.zeros(1001)
+        Wd = np.sqrt(1-eta**2)*Wn
+        disp = np.exp(-eta*Wn*t)*(x0*np.cos(Wd*t)+((v0+eta*Wn*x0)/Wd)*np.sin(Wd*t))
+        disp0, vel0, accl0 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp1, vel1, accl1 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp3, vel3, accl3 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp4, vel4, accl4 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        plt.plot(t,disp,'--',label='Analytical')
+        plt.plot(t,disp0, c='k', label='constant-average')
+        plt.plot(t,disp1, c='c', label='linear')
+        plt.plot(t,disp3, c='b', label='Galerkin method')
+        plt.plot(t,disp4, c='r', label='backward difference')
+        plt.title('DEMO 1 Free vibration')
+        plt.ylabel('Displacement (m)')
+        plt.xlabel('Time (sec)')
+        plt.legend()
+        plt.show()
+    else:
+        print "\t{0:40s} :: {1:40s}".format('Input file name',sys.argv[1])
+        if ~os.path.isfile(sys.argv[1]):
+            print "\t\tFile {0:s} does not exist....".format(sys.argv[1])
+        entering = True
+        while entering:
+            M = input("Enter the mass value         = ")
+            C = input("Enter the damping value       = ")
+            K = input("Enter the stiffness value      = ")
+            x0 = input("Enter the initial displacement = ")
+            v0 = input("Enter the initial velocity     = ")
+            print "\t\t{0:40s} = {1:s}".format('Input file name',sys.argv[1])
+            print "\t\t{0:40s} = {1:.4f}".format('Mass value',M)
+            print "\t\t{0:40s} = {1:.4f}".format('Damping value',C)
+            print "\t\t{0:40s} = {1:.4f}".format('Stiffness value',K)
+            print "\t\t{0:40s} = {1:.4f} ras/s".format('Natiral frequency of system ',np.sqrt(K/float(M)))
+            print "\t\t{0:40s} = {1:.4f} ".format('Damping ratio frequency of system ',C/(2.*float(M)*np.sqrt(M/K)))
+            print "\t\t{0:40s} = {1:.4f} m".format('Initial displacement of system ',x0)
+            print "\t\t{0:40s} = {1:.4f} m/s".format('Initial velocity of system ',v0)
+            while True:
+                key = raw_input("\t\tType yes Proceed to analysis or no to change the values (yes/no) ")
+                if (key=='y') or (key=='yes'):
+                    print "\t Please re-enter the values again"
+                    break
+                elif (key=='n') or (key=='no'):
+                    entering = False
+                    break
+                else:
+                    print "Invalid input please try again..."
+'''
+        kobe = np.loadtxt('Kobe.txt')
+        disp0, vel0, accl0 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=0, x0=0.0, v0=0.0)
+        disp1, vel1, accl1 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=1, x0=0.0, v0=0.0)
+        disp3, vel3, accl3 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=3, x0=0.0, v0=0.0)
+        disp4, vel4, accl4 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=4, x0=0.0, v0=0.0)
+        plt.subplot(2, 2, 1)
+        plt.plot( kobe[:,0], kobe[:,1], '--')
+        plt.title('Input Accelarogram')
+        plt.ylabel('Accelaration (g)')
+        plt.xlabel('Time (sec)')
 
-    plt.subplot(2, 2, 2)
-    plt.plot( kobe[:,0], disp0, c='k', label='constant-average')
-    plt.plot( kobe[:,0], disp1, c='c', label='linear')
-#    plt.plot( kobe[:,0], disp2, c='g')
-    plt.plot( kobe[:,0], disp3, c='b', label='Galerkin method')
-    plt.plot( kobe[:,0], disp4, c='r', label='backward difference')
-    plt.title('Output Displacement')
-    plt.ylabel('Displacement (m)')
-    plt.xlabel('Time (sec)')
-    plt.legend()
+        plt.subplot(2, 2, 2)
+        plt.plot( kobe[:,0], disp0, c='k', label='constant-average')
+        plt.plot( kobe[:,0], disp1, c='c', label='linear')
+        plt.plot( kobe[:,0], disp3, c='b', label='Galerkin method')
+        plt.plot( kobe[:,0], disp4, c='r', label='backward difference')
+        plt.title('Output Displacement')
+        plt.ylabel('Displacement (m)')
+        plt.xlabel('Time (sec)')
+        plt.legend()
 
-    plt.subplot(2, 2, 3)
-    plt.plot( kobe[:,0], vel0, c='k', label='constant-average')
-    plt.plot( kobe[:,0], vel1, c='c', label='linear')
-#    plt.plot( kobe[:,0], vel2, c='g')
-    plt.plot( kobe[:,0], vel3, c='b', label='Galerkin method')
-    plt.plot( kobe[:,0], vel4, c='r', label='backward difference')
-    plt.title('Output Velocity')
-    plt.ylabel('Velocity (m/s)')
-    plt.xlabel('Time (sec)')
-    plt.legend()
+        plt.subplot(2, 2, 3)
+        plt.plot( kobe[:,0], vel0, c='k', label='constant-average')
+        plt.plot( kobe[:,0], vel1, c='c', label='linear')
+        plt.plot( kobe[:,0], vel3, c='b', label='Galerkin method')
+        plt.plot( kobe[:,0], vel4, c='r', label='backward difference')
+        plt.title('Output Velocity')
+        plt.ylabel('Velocity (m/s)')
+        plt.xlabel('Time (sec)')
+        plt.legend()
 
-    plt.subplot(2, 2, 4)
-    plt.plot( kobe[:,0], accl0/9.81, c='k', label='constant-average')
-    plt.plot( kobe[:,0], accl1/9.81, c='c', label='linear')
-#    plt.plot( kobe[:,0], accl2, c='g')
-    plt.plot( kobe[:,0], accl3/9.81, c='b', label='Galerkin method')
-    plt.plot( kobe[:,0], accl4/9.81, c='r', label='backward difference')
-    plt.title('Output Accelarogram')
-    plt.ylabel('Accelaration (g)')
-    plt.xlabel('Time (sec)')
-    plt.legend()
+        plt.subplot(2, 2, 4)
+        plt.plot( kobe[:,0], accl0/9.81, c='k', label='constant-average')
+        plt.plot( kobe[:,0], accl1/9.81, c='c', label='linear')
+        plt.plot( kobe[:,0], accl3/9.81, c='b', label='Galerkin method')
+        plt.plot( kobe[:,0], accl4/9.81, c='r', label='backward difference')
+        plt.title('Output Accelarogram')
+        plt.ylabel('Accelaration (g)')
+        plt.xlabel('Time (sec)')
+        plt.legend()
 
-    plt.tight_layout()
-    plt.show()
+        plt.tight_layout()
+        plt.show()
+'''

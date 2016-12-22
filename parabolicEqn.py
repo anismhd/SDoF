@@ -1,6 +1,6 @@
 # 0 - the constant-average accelaration method (stable)
 # 1 - the linear accelaration method (conditionally stable)
-# 2 - the central difference method (conditionally stable)
+# 2 - the central difference method (conditionally stable) --- This need more explanation
 # 3 - the Galerkin method (stable)
 # 4 - the backward difference method (stable)
 from numpy import zeros

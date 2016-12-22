@@ -92,3 +92,8 @@ ENV/
 
 # temporary files
 *~
+
+# Earthquakes
+Kobe.txt
+*.AT2
+*.AT1

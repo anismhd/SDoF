@@ -56,6 +56,14 @@ if __name__ == "__main__":
     print "\t\t 1 - The linear accelaration method (conditionally stable)"
     print "\t\t 3 - The Galerkin method (stable)"
     print "\t\t 4 - The backward difference method (stable) \n\n"
+    analysis_type = {}
+    analysis_type[0] = 'the constant-average accelaration method (stable)'
+    analysis_type[1] = 'the linear accelaration method (conditionally stable)'
+#    analysis_type[2] = 'the central difference method (conditionally stable) --- This need more explanation'
+    analysis_type[3] = 'The Galerkin method (stable)'
+    analysis_type[4] = 'The backward difference method (stable)'
+# 3 - the Galerkin method (stable)
+# 4 - the backward difference method (stable)
     if len(sys.argv) < 2:
         print "This is a demo output of module.."
         print "\nDEMO 1 - Comparison of analytical and module output - Free vibration"
@@ -92,19 +100,33 @@ if __name__ == "__main__":
             print "\t\tFile {0:s} does not exist....".format(sys.argv[1])
         entering = True
         while entering:
-            M = input("Enter the mass value         = ")
-            C = input("Enter the damping value       = ")
-            K = input("Enter the stiffness value      = ")
-            x0 = input("Enter the initial displacement = ")
-            v0 = input("Enter the initial velocity     = ")
+            M = input("\t{0:40s}= ".format('Enter the mass value'))
+            C = input("\t{0:40s}= ".format('Enter the damping value'))
+            K = input("\t{0:40s}= ".format('Enter the stiffness value'))
+            x0 = input("\t{0:40s}= ".format('Enter the initial displacement'))
+            v0 = input("\t{0:40s}= ".format('Enter the initial velocity'))
+            print "\t0-{0:s}\n\t1-{1:s}\n\t3-{2:s}\n\t4-{3:s}".format(analysis_type[0],analysis_type[1],analysis_type[3],analysis_type[4])
+            while True:
+                n = input("\t{0:40s}= ".format('Enter the type of analysis from above list'))
+                if n in [0,2,3,4]:
+                    break
+                else:
+                    print "\t Invalid analysis type.. please try again.."
+
+            M = float(M)
+            C = float(C)
+            K = float(K)
+            x0 = float(x0)
+            v0 = float(v0)
             print "\t\t{0:40s} = {1:s}".format('Input file name',sys.argv[1])
             print "\t\t{0:40s} = {1:.4f}".format('Mass value',M)
             print "\t\t{0:40s} = {1:.4f}".format('Damping value',C)
             print "\t\t{0:40s} = {1:.4f}".format('Stiffness value',K)
-            print "\t\t{0:40s} = {1:.4f} ras/s".format('Natiral frequency of system ',np.sqrt(K/float(M)))
-            print "\t\t{0:40s} = {1:.4f} ".format('Damping ratio frequency of system ',C/(2.*float(M)*np.sqrt(M/K)))
+            print "\t\t{0:40s} = {1:.4f} ras/s".format('Natiral frequency of system ',np.sqrt(K/M))
+            print "\t\t{0:40s} = {1:.4f} ".format('Damping ratio frequency of system ',C/(2.*M*np.sqrt(M/K)))
             print "\t\t{0:40s} = {1:.4f} m".format('Initial displacement of system ',x0)
             print "\t\t{0:40s} = {1:.4f} m/s".format('Initial velocity of system ',v0)
+            print "\t\t{0:40s} = {1:s} m/s".format('Type of analysis',analysis_type[n])
             while True:
                 key = raw_input("\t\tType yes Proceed to analysis or no to change the values (yes/no) ")
                 if (key=='y') or (key=='yes'):
@@ -115,6 +137,9 @@ if __name__ == "__main__":
                     break
                 else:
                     print "Invalid input please try again..."
+        data = np.loadtxt(sys.argv[1])
+        disp, vel, accl = parabolicEqn(M, C, K, data[:,1], data[:,0], n=n, x0=x0, v0=v0)
+
 '''
         kobe = np.loadtxt('Kobe.txt')
         disp0, vel0, accl0 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=0, x0=0.0, v0=0.0)

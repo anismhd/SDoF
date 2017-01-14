@@ -4,7 +4,7 @@
 # 3 - the Galerkin method (stable)
 # 4 - the backward difference method (stable)
 from numpy import zeros
-def parabolicEqn(M, C, K, F, t, n=0, x0=0.0, v0=0.0):
+def hyperbolicEqn(M, C, K, F, t, n=0, x0=0.0, v0=0.0):
     if n == 0:
         a = 0.5
         b = 0.5
@@ -110,10 +110,10 @@ if __name__ == "__main__":
         f = np.zeros(1001)
         Wd = np.sqrt(1-eta**2)*Wn
         disp = np.exp(-eta*Wn*t)*(x0*np.cos(Wd*t)+((v0+eta*Wn*x0)/Wd)*np.sin(Wd*t))
-        disp0, vel0, accl0 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
-        disp1, vel1, accl1 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
-        disp3, vel3, accl3 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
-        disp4, vel4, accl4 = parabolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp0, vel0, accl0 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp1, vel1, accl1 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp3, vel3, accl3 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp4, vel4, accl4 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
         plt.plot(t,disp,'--',label='Analytical')
         plt.plot(t,disp0, c='k', label='constant-average')
         plt.plot(t,disp1, c='c', label='linear')
@@ -168,14 +168,14 @@ if __name__ == "__main__":
                 else:
                     print "Invalid input please try again..."
         data = np.loadtxt(sys.argv[1])
-        disp, vel, accl = parabolicEqn(M, C, K, data[:,1], data[:,0], n=n, x0=x0, v0=v0)
+        disp, vel, accl = hyperbolicEqn(M, C, K, data[:,1], data[:,0], n=n, x0=x0, v0=v0)
 
 '''
         kobe = np.loadtxt('Kobe.txt')
-        disp0, vel0, accl0 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=0, x0=0.0, v0=0.0)
-        disp1, vel1, accl1 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=1, x0=0.0, v0=0.0)
-        disp3, vel3, accl3 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=3, x0=0.0, v0=0.0)
-        disp4, vel4, accl4 = parabolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=4, x0=0.0, v0=0.0)
+        disp0, vel0, accl0 = hyperbolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=0, x0=0.0, v0=0.0)
+        disp1, vel1, accl1 = hyperbolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=1, x0=0.0, v0=0.0)
+        disp3, vel3, accl3 = hyperbolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=3, x0=0.0, v0=0.0)
+        disp4, vel4, accl4 = hyperbolicEqn(1, 2.0*6.0*0.05, 36.0, kobe[:,1]*9.81, kobe[:,0], n=4, x0=0.0, v0=0.0)
         plt.subplot(2, 2, 1)
         plt.plot( kobe[:,0], kobe[:,1], '--')
         plt.title('Input Accelarogram')

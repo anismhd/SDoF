@@ -1,5 +1,5 @@
-#Single Degree of Freedom System Solver 
-##using Time Integration or Frequency Domain Analysis 
+# Single Degree of Freedom System Solver 
+## using Time Integration or Frequency Domain Analysis 
 Anis Mohammed Vengasseri
 anis.mhd@gmail.com
 

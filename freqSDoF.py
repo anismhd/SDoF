@@ -5,8 +5,8 @@ https://github.com/anismhd
 
 This a module to evaluate response of SDoF system in frequency domain
 '''
-from numpy import zeros
-from numpy.fft import fft
+from numpy import zeros,pi,real
+from numpy.fft import fft, fftfreq, ifft
 def freqSDoF(M, C, K, F, dT):
 	force_DFT = fft(F)
 	freq = 2.0*pi*fftfreq(len(F),dT)

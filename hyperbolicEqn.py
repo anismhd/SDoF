@@ -111,9 +111,9 @@ if __name__ == "__main__":
         Wd = np.sqrt(1-eta**2)*Wn
         disp = np.exp(-eta*Wn*t)*(x0*np.cos(Wd*t)+((v0+eta*Wn*x0)/Wd)*np.sin(Wd*t))
         disp0, vel0, accl0 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
-        disp1, vel1, accl1 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
-        disp3, vel3, accl3 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
-        disp4, vel4, accl4 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=0, x0=x0, v0=v0)
+        disp1, vel1, accl1 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=1, x0=x0, v0=v0)
+        disp3, vel3, accl3 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=3, x0=x0, v0=v0)
+        disp4, vel4, accl4 = hyperbolicEqn(1.0, 2.0*Wn*eta, Wn**2, f, t, n=4, x0=x0, v0=v0)
         plt.plot(t,disp,'--',label='Analytical')
         plt.plot(t,disp0, c='k', label='constant-average')
         plt.plot(t,disp1, c='c', label='linear')

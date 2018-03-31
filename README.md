@@ -8,22 +8,11 @@ anis.mhd@gmail.com
 This is function written in python to solve linear single degree of freedom system
 The theoretical backhround of the same can be found in following book
 
-Title	An Introduction To The Finite Element Method
-McGraw-Hill series in mechanical engineering
-Author	J. N. Reddy
-Edition	3
-Publisher	McGraw-Hill, 2006
-ISBN	007053084X, 9780070530843
-Length	766 pages
+	1 - Title	An Introduction To The Finite Element Method,*McGraw-Hill series in mechanical engineering*,Author	J. N. Reddy, Edition 3,Publisher	McGraw-Hill, 2006, ISBN	007053084X, 9780070530843, 766 pages
 
-	| Inputs  | Description             |
-	| ------- | ----------------------- |
-	| *N*     | define type of analysis |
-
-	Markdown | Less | Pretty
-	--- | --- | ---
-	*Still* | `renders` | **nicely**
-	1 | 2 | 3
+| Inputs  | Description             |
+| ------- | ----------------------- |
+| *N*     | define type of analysis |
 
 Inputs		:: N, Mass, Damping, Stiffness, Time, Accelaration, Initial displacement, Initial velocity
 Where N will be used to define type of analysis

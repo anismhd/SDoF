@@ -10,7 +10,8 @@ The theoretical background of the same can be found in following book
 
 | Inputs  | Description             |
 | ------- | ----------------------- |
-| *N*     | define type of analysis \\ 0 - the constant-average acceleration method (stable) |
+| *N*     | define type of <br> analysis |
+|         | 0 - the constant-average acceleration method (stable) |
 |         | 1 - the linear acceleration method (conditionally stable) |
 |         | 2 - the central difference method (conditionally stable) - This shouldn't be used |
 |         | 3 - the Galerkin method (stable) |
@@ -22,6 +23,7 @@ The theoretical background of the same can be found in following book
 |*F*| Forcing time history |
 |$x_0$ | Initial displacement |
 |$v_0$ | Initial velocity |
+
 
 | Inputs  | Description             |
 | ------- | ----------------------- |

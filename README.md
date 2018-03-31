@@ -1,8 +1,8 @@
 # Single Degree of Freedom System Solver 
 
-$$ M \ddot{x} + C \dot{x} + K x = F(t) $$
+This python program solves single degree of freedom equation.
 
-## Time Integration or Frequency Domain Analysis 
+## Time Integration 
 This is function written in python to solve linear single degree of freedom system
 The theoretical background of the same can be found in following book
 
@@ -24,12 +24,10 @@ The theoretical background of the same can be found in following book
 |$x_0$ | Initial displacement |
 |$v_0$ | Initial velocity |
 
-Inputs		:: N, Mass, Damping, Stiffness, Time, Acceleration, Initial displacement, Initial velocity
-Where N will be used to define type of analysis
-	0 - the constant-average accelaration method (stable)
-	1 - the linear accelaration method (conditionally stable)
-	2 - the central difference method (conditionally stable) - This should'nt be used
-	3 - the Galerkin method (stable)
-	4 - the backward difference method (stable)
+| Inputs  | Description             |
+| ------- | ----------------------- |
+| *disp*  | displacement time history of SDoF solution |
+| *vel*   | velocity time history of SDoF solution |
+| *accl*  | acceleration time history of SDoF solution |
 
-Output		:: displacement, velocity, accelaration
+## Frequency Domain Analysis

@@ -1,8 +1,6 @@
 # Single Degree of Freedom System Solver 
 
-\begin{equation}
-	M \ddot{x} + C \dot{x} + K x = F(t)
-\end{equation}
+$$ M \ddot{x} + C \dot{x} + K x = F(t) $$
 
 ## Time Integration or Frequency Domain Analysis 
 This is function written in python to solve linear single degree of freedom system

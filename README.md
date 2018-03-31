@@ -10,12 +10,7 @@ The theoretical background of the same can be found in following book
 
 | Inputs  | Description             |
 | ------- | ----------------------- |
-| *N*     | define type of  analysis <br>
-0 - the constant-average acceleration method (stable) <br>
-1 - the linear acceleration method (conditionally stable) <br>
-2 - the central difference method (conditionally stable) - This shouldn't be used <br>
-3 - the Galerkin method (stable) <br>
-4 - the backward difference method (stable) |
+| *N*     | define type of  analysis <br>0 - the constant-average acceleration method (stable) <br>1 - the linear acceleration method (conditionally stable) <br>2 - the central difference method (conditionally stable) - This shouldn't be used <br>3 - the Galerkin method (stable) <br>4 - the backward difference method (stable) |
 |*M*   | single degree of freedom mass |
 |*C*| single degree of freedom damping co-efficient |
 |*K*| stiffness of single degree of freedom |

@@ -1,8 +1,11 @@
 # Single Degree of Freedom System Solver 
-## using Time Integration or Frequency Domain Analysis 
+
 Anis Mohammed Vengasseri
+
 anis.mhd@gmail.com
 
+## Time Integration or Frequency Domain Analysis 
+	
 	This is function written in python to solve linear single degree of freedom system
 
 	The theoretical backhround of the same can be found in following book
@@ -15,6 +18,10 @@ anis.mhd@gmail.com
 	ISBN	007053084X, 9780070530843
 	Length	766 pages
 
+
+	|Inputs | Description|
+	|-------|------------|
+	|*N*| define type of analysis|
 
 	Inputs		:: N, Mass, Damping, Stiffness, Time, Accelaration, Initial displacement, Initial velocity
 	Where N will be used to define type of analysis

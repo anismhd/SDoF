@@ -18,10 +18,14 @@ anis.mhd@gmail.com
 	ISBN	007053084X, 9780070530843
 	Length	766 pages
 
-
 	|Inputs | Description|
 	|-------|------------|
 	|*N*| define type of analysis|
+
+	Markdown | Less | Pretty
+	--- | --- | ---
+	*Still* | `renders` | **nicely**
+	1 | 2 | 3
 
 	Inputs		:: N, Mass, Damping, Stiffness, Time, Accelaration, Initial displacement, Initial velocity
 	Where N will be used to define type of analysis

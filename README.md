@@ -8,6 +8,8 @@ The theoretical background of the same can be found in following book
 
 	1 - An Introduction To The Finite Element Method,*McGraw-Hill series in mechanical engineering*,J. N. Reddy, Edition 3, 2006, ISBN	007053084X, 9780070530843, 766 pages
 
+The function takes following input arguments,
+
 | Inputs  | Description             |
 | ------- | ----------------------- |
 | *N*     | define type of  analysis <br>0 - the constant-average acceleration method (stable) <br>1 - the linear acceleration method (conditionally stable) <br>2 - the central difference method (conditionally stable) - This shouldn't be used <br>3 - the Galerkin method (stable) <br>4 - the backward difference method (stable) |
@@ -16,9 +18,10 @@ The theoretical background of the same can be found in following book
 |*K*| stiffness of single degree of freedom |
 |*t*| time index for forcing time history |
 |*F*| Forcing time history |
-|$x_0$ | Initial displacement |
-|$v_0$ | Initial velocity |
+|*x0* | Initial displacement |
+|*v0* | Initial velocity |
 
+and the outputs are,
 
 | Inputs  | Description             |
 | ------- | ----------------------- |

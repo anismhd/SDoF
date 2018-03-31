@@ -16,9 +16,9 @@ Publisher	McGraw-Hill, 2006
 ISBN	007053084X, 9780070530843
 Length	766 pages
 
-	|Inputs | Description|
-	|-------|------------|
-	|*N*| define type of analysis|
+	| Inputs  | Description             |
+	| ------- | ----------------------- |
+	| *N*     | define type of analysis |
 
 	Markdown | Less | Pretty
 	--- | --- | ---
